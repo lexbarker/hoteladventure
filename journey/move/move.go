@@ -18,10 +18,32 @@ func Move(playerloc *player.Stats, fp []hotelmap.Edge) {
 	for _, place := range moves {
 		fmt.Printf("\t%s\n", place)
 	}
+	var moveto string
 	reader := bufio.NewReader(os.Stdin)
-	fmt.Printf("Where to now? ...\n")
-	nextmove, _ := reader.ReadString('\n')
-	fmt.Println("Moving to  ", string(nextmove))
-	nextloc := strings.Trim(nextmove, "\n")
+	for {
+		fmt.Printf("Where to now? ...\n")
+		var res bool
+		nextmove, _ := reader.ReadString('\n')
+		res, moveto = legalmove(moves, nextmove)
+		if res {
+			break
+		}
+		fmt.Println(" choice not recognised")
+	}
+	fmt.Println("Moving to  ", string(moveto))
+	nextloc := strings.Trim(moveto, "\n")
 	playerloc.CurrentLocation = nextloc
+}
+
+func legalmove(moveopts []string, playermove string) (bool, string) {
+	for _, node := range moveopts {
+
+		move := strings.TrimSuffix(playermove, "\n")
+
+		if strings.EqualFold(node, move) {
+			return true, node
+		}
+	}
+	return false, playermove
+
 }
