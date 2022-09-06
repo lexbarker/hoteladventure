@@ -11,8 +11,7 @@ import (
 )
 
 func Move(playerloc *player.Stats, fp []hotelmap.Edge) {
-	fmt.Printf("you see..\n")
-	fmt.Printf("Current locale %s\n", playerloc.CurrentLocation)
+	//fmt.Printf("Current locale %s\n", playerloc.CurrentLocation)
 	fmt.Println("You can move to-")
 	moves := hotelmap.DirectionOptions(string(playerloc.CurrentLocation), fp)
 	for _, place := range moves {
@@ -31,6 +30,7 @@ func Move(playerloc *player.Stats, fp []hotelmap.Edge) {
 		fmt.Println(" choice not recognised")
 	}
 	fmt.Println("Moving to  ", string(moveto))
+	fmt.Println()
 	nextloc := strings.Trim(moveto, "\n")
 	playerloc.CurrentLocation = nextloc
 }

@@ -14,6 +14,6 @@ func Setup() Stats {
 	var stats Stats
 	stats.Health = 10
 	stats.Score = 0
-	stats.CurrentLocation = "Entrance"
+	stats.CurrentLocation = "entrance"
 	return stats
 }
